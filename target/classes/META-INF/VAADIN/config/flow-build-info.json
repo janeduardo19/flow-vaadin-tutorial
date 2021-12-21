@@ -1,0 +1,16 @@
+{
+  "productionMode": false,
+  "useDeprecatedV14Bootstrapping": false,
+  "eagerServerLoad": false,
+  "npmFolder": "/home/jan/Documentos/Java/flow-crm-tutorial",
+  "generatedFolder": "/home/jan/Documentos/Java/flow-crm-tutorial/target/frontend",
+  "frontendFolder": "/home/jan/Documentos/Java/flow-crm-tutorial/frontend",
+  "connect.javaSourceFolder": "/home/jan/Documentos/Java/flow-crm-tutorial/src/main/java",
+  "javaResourceFolder": "/home/jan/Documentos/Java/flow-crm-tutorial/src/main/resources",
+  "connect.applicationProperties": "/home/jan/Documentos/Java/flow-crm-tutorial/src/main/resources/application.properties",
+  "connect.openApiFile": "/home/jan/Documentos/Java/flow-crm-tutorial/target/generated-resources/openapi.json",
+  "project.frontend.generated": "/home/jan/Documentos/Java/flow-crm-tutorial/frontend/generated",
+  "pnpm.enable": true,
+  "require.home.node": false,
+  "build.folder": "target"
+}

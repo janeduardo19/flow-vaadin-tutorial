@@ -2,6 +2,7 @@ package com.example.application.views.list;
 
 import com.example.application.data.entity.Contact;
 import com.example.application.data.service.CrmService;
+import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -12,7 +13,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "")
+@Route(value = "", layout = MainLayout.class)
 @PageTitle("Contacts | Vaadin CRM")
 public class ListView extends VerticalLayout {
     Grid<Contact> grid = new Grid<>(Contact.class);
@@ -51,6 +52,22 @@ public class ListView extends VerticalLayout {
     private void configureForm() {
         form = new ContactForm(service.findAllCompanies(), service.findAllStatuses()); 
         form.setWidth("25em");
+
+        form.addListener(ContactForm.SaveEvent.class, this::saveContact);
+        form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
+        form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
+    }
+
+    private void saveContact(ContactForm.SaveEvent event) {
+        service.saveContact(event.getContact());
+        updateList();
+        closeEditor();
+    }
+
+    private void deleteContact(ContactForm.DeleteEvent event) {
+        service.deleteContact(event.getContact());
+        updateList();
+        closeEditor();
     }
 
     private void configureGrid() {
@@ -81,10 +98,16 @@ public class ListView extends VerticalLayout {
         filterText.addValueChangeListener(e -> updateList()); 
 
         Button addContactButton = new Button("Add contact");
+        addContactButton.addClickListener(e -> addContact());
 
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addContactButton);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    private void addContact() {
+        grid.asSingleSelect().clear();
+        editContact(new Contact());
     }
 
     private void updateList() { 
